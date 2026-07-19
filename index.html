@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2B6CB0">
+    <meta name="description" content="آموزش جامع لغات انگلیسی با داستان‌های آموزشی و آزمون‌های تعاملی">
+    <title>آموزش جامع لغات انگلیسی</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-language"></i> آموزش جامع لغات انگلیسی</h1>
+                <p>یادگیری لغات کاربردی در ۹ دسته موضوعی با قابلیت تلفظ، آزمون و داستان‌های آموزشی</p>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div class="progress-info">
+                <h3><i class="fas fa-chart-line"></i> آمار کلی برنامه</h3>
+                <div id="progressText">برای تلفظ لغت، روی آن کلیک کنید. برای تلفظ مثال، روی بخش مثال کلیک کنید.</div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalWords">0</div>
+                    <div class="stat-label">لغت کل</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="learnedWords">0</div>
+                    <div class="stat-label">یادگرفته شده</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="testScore">0</div>
+                    <div class="stat-label">میانگین آزمون</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="testCount">0</div>
+                    <div class="stat-label">آزمون داده شده</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بخش نمودار پیشرفت -->
+        <div class="chart-container">
+            <h3><i class="fas fa-chart-bar"></i> پیشرفت در دسته‌های مختلف</h3>
+            <div id="progressChart"></div>
+        </div>
+        
+        <div class="content">
+            <div class="main-content">
+                <div class="level-selector">
+                    <h3><i class="fas fa-layer-group"></i> انتخاب دسته لغات</h3>
+                    <div class="level-buttons">
+                        <!-- دکمه‌ها از طریق JavaScript پر می‌شود -->
+                    </div>
+                </div>
+                
+                <!-- بخش فیلتر سطح -->
+                <div class="filter-container">
+                    <div class="filter-box">
+                        <label for="levelFilter"><i class="fas fa-filter"></i> فیلتر بر اساس سطح:</label>
+                        <select id="levelFilter">
+                            <option value="all">همه سطوح</option>
+                            <option value="beginner">مبتدی</option>
+                            <option value="intermediate">متوسط</option>
+                            <option value="advanced">پیشرفته</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <h2 id="categoryTitle">لغات دسته مکالمه روزمره</h2>
+                <div class="vocabulary-list" id="vocabularyList">
+                    <!-- لغات از طریق JavaScript پر می‌شود -->
+                </div>
+                
+                <div class="actions">
+                    <button class="action-btn test-btn" id="startTestBtn">
+                        <i class="fas fa-clipboard-check"></i> شروع آزمون
+                    </button>
+                    <button class="action-btn stories-btn" id="showStoriesBtn">
+                        <i class="fas fa-book-open"></i> داستان‌های آموزشی
+                    </button>
+                    <button class="action-btn reset-btn" id="resetProgressBtn">
+                        <i class="fas fa-redo"></i> بازنشانی
+                    </button>
+                </div>
+                
+                <!-- بخش داستان‌ها -->
+                <div class="stories-container" id="storiesContainer" style="display: none;">
+                    <div class="stories-header">
+                        <h3><i class="fas fa-book-open"></i> داستان‌های آموزشی</h3>
+                        <button class="close-btn" id="closeStoriesBtn">&times;</button>
+                    </div>
+                    <div class="stories-list" id="storiesList">
+                        <!-- داستان‌ها از طریق JavaScript پر می‌شود -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>برنامه آموزش جامع لغات انگلیسی | برای تلفظ روی لغت یا مثال کلیک کنید</p>
+        </footer>
+    </div>
+    
+    <!-- صفحه آزمون -->
+    <div class="test-container" id="testContainer">
+        <div class="test-content">
+            <div class="test-header">
+                <h2 id="testTitle">آزمون لغات انگلیسی</h2>
+                <button class="close-btn" id="closeTestBtn">&times;</button>
+            </div>
+            
+            <div id="testSetup" style="display: block;">
+                <div class="question">تعداد سوالات آزمون را انتخاب کنید:</div>
+                <div class="question-count-selector">
+                    <button class="count-btn" data-count="5">۵ سوال</button>
+                    <button class="count-btn active" data-count="10">۱۰ سوال</button>
+                    <button class="count-btn" data-count="15">۱۵ سوال</button>
+                    <button class="count-btn" data-count="20">۲۰ سوال</button>
+                    <button class="count-btn" data-count="30">۳۰ سوال</button>
+                </div>
+                <div style="text-align: center; color: #64748b; margin-top: 10px; font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> سوالات شامل لغت‌شناسی و درک مطلب از داستان‌ها
+                </div>
+                <div class="test-actions">
+                    <button class="test-btn start-test-btn" id="startTestConfirmBtn">شروع آزمون</button>
+                    <button class="test-btn cancel-btn" id="cancelTestBtn">لغو</button>
+                </div>
+            </div>
+            
+            <div id="testBody" style="display: none;">
+                <div class="question" id="testQuestion">سوال نمایش داده می‌شود...</div>
+                
+                <div class="options" id="testOptions">
+                    <!-- گزینه‌ها از طریق JavaScript پر می‌شود -->
+                </div>
+                
+                <div class="test-actions">
+                    <div id="testProgress">سوال ۱ از ۱۰</div>
+                    <div>
+                        <button class="test-btn next-btn" id="nextQuestionBtn">سوال بعدی</button>
+                        <button class="test-btn submit-btn" id="submitTestBtn" style="display: none;">پایان آزمون</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="testResult" class="result-container" style="display: none;">
+                <h3>نتیجه آزمون</h3>
+                <div class="result-score" id="finalScore">۰</div>
+                <div class="result-message" id="resultMessage">پیام نتیجه نمایش داده می‌شود...</div>
+                
+                <div class="result-details" id="resultDetails">
+                    <div class="result-detail-box">
+                        <div class="result-detail-value" id="correctAnswers">۰</div>
+                        <div class="result-detail-label">پاسخ صحیح</div>
+                    </div>
+                    <div class="result-detail-box">
+                        <div class="result-detail-value" id="wrongAnswers">۰</div>
+                        <div class="result-detail-label">پاسخ اشتباه</div>
+                    </div>
+                    <div class="result-detail-box">
+                        <div class="result-detail-value" id="timeSpent">۰</div>
+                        <div class="result-detail-label">ثانیه زمان</div>
+                    </div>
+                </div>
+                
+                <div class="result-actions">
+                    <button class="test-btn next-btn" id="retryTestBtn">آزمون مجدد</button>
+                    <button class="test-btn submit-btn" id="closeResultBtn">بازگشت به آموزش</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فایل‌های JavaScript - ترتیب بارگذاری مهم است -->
+    <script src="config.js"></script>
+    <script src="words.js"></script>
+    <script src="stories.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registered successfully'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        }
+    </script>
+</body>
+</html>
